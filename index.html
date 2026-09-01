@@ -9,6 +9,7 @@
 </head>
 <body class="bg-[#0B0F17] text-white font-sans select-none min-h-screen pb-24">
 
+  <!-- TOP HEADER -->
   <header class="sticky top-0 bg-[#0B0F17]/90 backdrop-blur-md z-40 px-4 py-3 border-b border-gray-800/80 flex justify-between items-center">
     <div class="flex items-center space-x-2.5">
       <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm shadow-lg shadow-blue-500/20">EM</div>
@@ -26,8 +27,10 @@
     </div>
   </header>
 
+  <!-- MAIN CONTENT CONTAINER -->
   <main class="max-w-md mx-auto p-4 space-y-5">
 
+    <!-- 1. HOME VIEW -->
     <div id="view-home" class="space-y-4">
       <div class="grid grid-cols-4 gap-2 text-center">
         <div class="bg-[#131924] p-2.5 rounded-xl border border-gray-800/80">
@@ -55,9 +58,9 @@
       <div class="bg-gradient-to-r from-amber-600/20 via-amber-500/10 to-transparent p-4 rounded-2xl border border-amber-500/30 flex justify-between items-center">
         <div>
           <span class="text-amber-400 text-xs font-bold flex items-center gap-1"><i class="fa-solid fa-fire"></i> আজকের চ্যালেঞ্জ 🔥</span>
-          <p class="text-[10px] text-gray-300 mt-0.5">১০টি প্রশ্ন • ১০ মিনিট</p>
+          <p class="text-[10px] text-gray-300 mt-0.5">ব্যাখ্যাসহ সমাধান • ১০ মিনিট</p>
         </div>
-        <button onclick="switchTab('exam')" class="bg-amber-500 text-black font-bold text-xs px-3 py-2 rounded-xl">চ্যালেঞ্জ নিন</button>
+        <button onclick="startQuiz()" class="bg-amber-500 text-black font-bold text-xs px-3 py-2 rounded-xl">চ্যালেঞ্জ নিন</button>
       </div>
 
       <div class="flex justify-between items-center pt-1">
@@ -77,6 +80,7 @@
       </div>
     </div>
 
+    <!-- 2. PRACTICE VIEW -->
     <div id="view-practice" class="space-y-4 hidden">
       <div class="bg-[#131924] p-4 rounded-2xl border border-gray-800">
         <span class="text-[10px] text-blue-400 font-semibold">প্রস্তুতিমূলক বিষয় নির্বাচন</span>
@@ -84,26 +88,28 @@
       </div>
 
       <div class="space-y-2.5">
-        <div class="bg-[#131924] p-3.5 rounded-xl border border-gray-800 space-y-2">
+        <div onclick="startQuiz()" class="bg-[#131924] p-3.5 rounded-xl border border-gray-800 space-y-2 cursor-pointer hover:border-blue-500">
           <div class="flex justify-between items-center">
             <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 text-xs"><i class="fa-solid fa-book"></i></div>
-              <div><h4 class="text-xs font-bold">পদার্থবিজ্ঞান (১ম ও ২য় পত্র)</h4><p class="text-[10px] text-gray-400">১০টি অধ্যায়</p></div>
+              <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 text-xs"><i class="fa-solid fa-atom"></i></div>
+              <div><h4 class="text-xs font-bold">পদার্থবিজ্ঞান (ব্যাখ্যাসহ)</h4><p class="text-[10px] text-gray-400">পরীক্ষা শুরু করতে ক্লিক করুন</p></div>
             </div>
-            <span class="text-xs font-bold text-gray-400">১০০%</span>
+            <span class="text-xs font-bold text-emerald-400"><i class="fa-solid fa-play"></i></span>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- 3. EXAM VIEW -->
     <div id="view-exam" class="space-y-4 hidden">
       <div class="bg-[#131924] p-4 rounded-xl border border-gray-800 space-y-3">
         <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] px-2 py-0.5 rounded-md font-bold">🔥 ডেইলি চ্যালেঞ্জ</span>
-        <h3 class="text-xs font-bold">আজকের ডেইলি চ্যালেঞ্জ</h3>
-        <button onclick="startLiveQuiz()" class="w-full bg-amber-500 text-black font-bold py-2 rounded-xl text-xs">পরীক্ষা শুরু করুন</button>
+        <h3 class="text-xs font-bold">আজকের মডেল টেস্ট (ব্যাখ্যাসহ)</h3>
+        <button onclick="startQuiz()" class="w-full bg-amber-500 text-black font-bold py-2 rounded-xl text-xs">পরীক্ষা শুরু করুন</button>
       </div>
     </div>
 
+    <!-- 4. LEADERBOARD VIEW -->
     <div id="view-leaderboard" class="space-y-4 hidden">
       <div class="text-center">
         <h2 class="text-sm font-bold">লিডারবোর্ড (Leaderboard)</h2>
@@ -114,6 +120,7 @@
       </div>
     </div>
 
+    <!-- 5. PROFILE VIEW -->
     <div id="view-profile" class="space-y-4 hidden">
       <div class="bg-[#131924] p-4 rounded-2xl border border-gray-800 text-center space-y-2">
         <div class="w-16 h-16 bg-amber-500 rounded-full mx-auto flex items-center justify-center font-bold text-xl text-black border-2 border-amber-400">
@@ -131,6 +138,7 @@
       </div>
     </div>
 
+    <!-- 6. ADMIN PANEL VIEW (Md Roni) -->
     <div id="view-admin" class="space-y-4 hidden">
       <div class="bg-[#131924] p-4 rounded-2xl border border-amber-500/40 flex items-center space-x-3">
         <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center font-bold text-lg border border-amber-500/30">
@@ -138,47 +146,54 @@
         </div>
         <div>
           <h3 class="font-bold text-sm text-white">Md Roni</h3>
-          <p class="text-[10px] text-amber-400 font-semibold">Super Admin • Exam Master</p>
+          <p class="text-[10px] text-amber-400 font-semibold">Super Admin Panel</p>
         </div>
       </div>
 
+      <!-- Add Question Form -->
       <div class="bg-[#131924] p-4 rounded-2xl border border-gray-800 space-y-3">
-        <h4 class="text-xs font-bold text-gray-300 border-l-2 border-amber-500 pl-2">নতুন প্রশ্ন যোগ করুন</h4>
-        <input id="new-q-title" type="text" placeholder="প্রশ্ন লিখুন..." class="w-full bg-[#0B0F17] border border-gray-800 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+        <h4 class="text-xs font-bold text-gray-300 border-l-2 border-amber-500 pl-2">নতুন প্রশ্ন যোগ করুন (ব্যাখ্যা বাধ্যতামূলক)</h4>
+        <input id="q-title" type="text" placeholder="প্রশ্ন লিখুন..." class="w-full bg-[#0B0F17] border border-gray-800 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
         
         <div class="grid grid-cols-2 gap-2">
-          <input id="opt-a" type="text" placeholder="অপশন A" class="bg-[#0B0F17] border border-gray-800 rounded-lg p-2 text-xs">
-          <input id="opt-b" type="text" placeholder="অপশন B" class="bg-[#0B0F17] border border-gray-800 rounded-lg p-2 text-xs">
-          <input id="opt-c" type="text" placeholder="অপশন C" class="bg-[#0B0F17] border border-gray-800 rounded-lg p-2 text-xs">
-          <input id="opt-d" type="text" placeholder="অপশন D" class="bg-[#0B0F17] border border-gray-800 rounded-lg p-2 text-xs">
+          <input id="opt-1" type="text" placeholder="অপশন ১" class="bg-[#0B0F17] border border-gray-800 rounded-lg p-2 text-xs text-white">
+          <input id="opt-2" type="text" placeholder="অপশন ২" class="bg-[#0B0F17] border border-gray-800 rounded-lg p-2 text-xs text-white">
+          <input id="opt-3" type="text" placeholder="অপশন ৩" class="bg-[#0B0F17] border border-gray-800 rounded-lg p-2 text-xs text-white">
+          <input id="opt-4" type="text" placeholder="অপশন ৪" class="bg-[#0B0F17] border border-gray-800 rounded-lg p-2 text-xs text-white">
         </div>
 
-        <button onclick="addNewQuestion()" class="w-full bg-amber-500 text-black font-bold py-2.5 rounded-xl text-xs hover:bg-amber-400 transition">প্রশ্ন সেভ করুন</button>
+        <input id="correct-opt" type="number" placeholder="সঠিক অপশন নম্বর (১, ২, ৩ নাকি ৪?)" class="w-full bg-[#0B0F17] border border-gray-800 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+        
+        <textarea id="exp-input" placeholder="প্রশ্নের সঠিক ও বিস্তারিত ব্যাখ্যা লিখুন (বাধ্যতামূলক)..." class="w-full bg-[#0B0F17] border border-gray-800 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-500 h-20"></textarea>
+
+        <button onclick="saveQuestion()" class="w-full bg-amber-500 text-black font-bold py-2.5 rounded-xl text-xs hover:bg-amber-400 transition">প্রশ্ন সেভ করুন</button>
       </div>
     </div>
 
+    <!-- 7. QUIZ INTERFACE VIEW -->
     <div id="view-quiz-active" class="space-y-4 hidden">
       <div class="flex justify-between items-center text-xs text-gray-400">
-        <span id="q-counter">প্রশ্ন ১ / ৫</span>
-        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded text-[10px]">১০:০০ মি.</span>
+        <span id="q-counter">প্রশ্ন ১ / ১</span>
+        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded text-[10px]">ব্যাখ্যাসহ মোড</span>
       </div>
 
       <div class="bg-[#131924] p-5 rounded-2xl border border-gray-800 space-y-4">
-        <h3 id="q-text" class="text-sm font-medium">প্রশ্ন লোড হচ্ছে...</h3>
-        <div id="options-list" class="space-y-2"></div>
+        <h3 id="q-text" class="text-sm font-medium"></h3>
+        <div id="options-container" class="space-y-2"></div>
       </div>
 
-      <div id="explanation-box" class="hidden bg-[#131924] p-4 rounded-2xl border border-emerald-500/40">
-        <span class="text-emerald-400 font-bold text-xs">ব্যাখ্যা:</span>
-        <p id="exp-text" class="text-xs text-gray-300"></p>
+      <!-- EXPLANATION BOX -->
+      <div id="explanation-box" class="hidden bg-[#131924] p-4 rounded-2xl border border-blue-500/40 space-y-1">
+        <span id="exp-status" class="font-bold text-xs"></span>
+        <p id="exp-text" class="text-xs text-gray-300 leading-relaxed mt-1"></p>
       </div>
 
-      <button id="btn-check" onclick="checkAnswer()" class="w-full bg-blue-600 font-bold py-3 rounded-xl text-xs">উত্তর সাবমিট করুন</button>
       <button id="btn-next" onclick="nextQuestion()" class="hidden w-full bg-emerald-600 font-bold py-3 rounded-xl text-xs">পরবর্তী প্রশ্ন</button>
     </div>
 
   </main>
 
+  <!-- BOTTOM NAVIGATION BAR -->
   <nav class="fixed bottom-0 left-0 right-0 bg-[#0B0F17]/95 backdrop-blur-lg border-t border-gray-800 py-2 px-3 z-50">
     <div class="max-w-md mx-auto flex justify-around text-gray-400 text-[10px]">
       <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center space-y-1 text-blue-500"><i class="fa-solid fa-house text-base"></i><span>হোম</span></button>
@@ -190,6 +205,23 @@
   </nav>
 
   <script>
+    let questions = [
+      {
+        q: "বল (Force) এর একক কোনটি?",
+        opts: ["জুল (Joule)", "নিউটন (Newton)", "ওয়াট (Watt)", "প্যাসকেল (Pascal)"],
+        ans: 1,
+        exp: "বলের এসআই (SI) একক হলো নিউটন (N)। বিজ্ঞানী আইজ্যাক নিউটনের নামানুসারে এটি রাখা হয়েছে।"
+      },
+      {
+        q: "আলোর বেগ শূন্যস্থানে কত?",
+        opts: ["3 x 10^8 m/s", "3 x 10^6 m/s", "3 x 10^10 m/s", "3 x 10^5 m/s"],
+        ans: 0,
+        exp: "শূন্যস্থানে বা বায়ুতে আলোর বেগ সর্বোচ্চ, যা প্রতি সেকেন্ডে প্রায় ৩,০০,০০০ কিলোমিটার বা 3 x 10^8 m/s।"
+      }
+    ];
+
+    let currentQIndex = 0;
+
     function switchTab(tabId) {
       const tabs = ['home', 'practice', 'exam', 'leaderboard', 'profile', 'admin', 'quiz-active'];
       tabs.forEach(t => {
@@ -206,11 +238,105 @@
       if(activeNav) activeNav.classList.add('text-blue-500');
     }
 
-    function addNewQuestion() {
-      const qTitle = document.getElementById('new-q-title').value;
-      if(qTitle === "") return alert("প্রশ্ন লিখুন!");
-      alert("Md Roni, নতুন প্রশ্ন সফলভাবে যোগ করা হয়েছে!");
-      document.getElementById('new-q-title').value = "";
+    function startQuiz() {
+      currentQIndex = 0;
+      switchTab('quiz-active');
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = questions[currentQIndex];
+      document.getElementById('q-counter').innerText = `প্রশ্ন ${currentQIndex + 1} / ${questions.length}`;
+      document.getElementById('q-text').innerText = q.q;
+      
+      const optsBox = document.getElementById('options-container');
+      optsBox.innerHTML = '';
+      document.getElementById('explanation-box').classList.add('hidden');
+      document.getElementById('btn-next').classList.add('hidden');
+
+      q.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left bg-[#0B0F17] border border-gray-800 p-3 rounded-xl text-xs hover:border-blue-500 transition flex items-center space-x-2";
+        btn.innerHTML = `<span class="w-5 h-5 bg-gray-800 rounded-full flex items-center justify-center text-[10px] font-bold">${idx + 1}</span> <span>${opt}</span>`;
+        btn.onclick = () => selectOption(idx, btn);
+        optsBox.appendChild(btn);
+      });
+    }
+
+    function selectOption(selectedIdx, btnElement) {
+      const q = questions[currentQIndex];
+      const optsBox = document.getElementById('options-container');
+      const children = optsBox.children;
+
+      for(let i=0; i<children.length; i++) {
+        children[i].onclick = null;
+      }
+
+      const expStatus = document.getElementById('exp-status');
+      const expBox = document.getElementById('explanation-box');
+
+      if(selectedIdx === q.ans) {
+        btnElement.classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-400');
+        expStatus.innerHTML = "<i class='fa-solid fa-circle-check text-emerald-400 mr-1'></i> আপনার উত্তর সঠিক হয়েছে!";
+        expStatus.className = "font-bold text-xs text-emerald-400";
+        expBox.className = "bg-[#131924] p-4 rounded-2xl border border-emerald-500/40 space-y-1";
+      } else {
+        btnElement.classList.add('bg-rose-500/20', 'border-rose-500', 'text-rose-400');
+        children[q.ans].classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-400');
+        expStatus.innerHTML = "<i class='fa-solid fa-circle-xmark text-rose-400 mr-1'></i> উত্তর ভুল হয়েছে! সঠিক ব্যাখ্যাটি দেখুন:";
+        expStatus.className = "font-bold text-xs text-rose-400";
+        expBox.className = "bg-[#131924] p-4 rounded-2xl border border-rose-500/40 space-y-1";
+      }
+
+      document.getElementById('exp-text').innerText = q.exp ? q.exp : "ব্যাখ্যা প্রস্তুত হচ্ছে।";
+      expBox.classList.remove('hidden');
+
+      document.getElementById('btn-next').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+      currentQIndex++;
+      if(currentQIndex < questions.length) {
+        loadQuestion();
+      } else {
+        alert("পরীক্ষা সম্পন্ন হয়েছে!");
+        switchTab('home');
+      }
+    }
+
+    function saveQuestion() {
+      const qTitle = document.getElementById('q-title').value;
+      const o1 = document.getElementById('opt-1').value;
+      const o2 = document.getElementById('opt-2').value;
+      const o3 = document.getElementById('opt-3').value;
+      const o4 = document.getElementById('opt-4').value;
+      const correct = parseInt(document.getElementById('correct-opt').value) - 1;
+      const exp = document.getElementById('exp-input').value;
+
+      if(!qTitle || !o1 || !o2 || !o3 || !o4 || isNaN(correct)) {
+        return alert("সবগুলো ঘর সঠিকভাবে পূরণ করুন!");
+      }
+
+      if(!exp.trim()) {
+        return alert("Md Roni, ব্যাখ্যা লেখা বাধ্যতামূলক!");
+      }
+
+      questions.push({
+        q: qTitle,
+        opts: [o1, o2, o3, o4],
+        ans: correct,
+        exp: exp
+      });
+
+      alert("Md Roni, নতুন প্রশ্ন সফলভাবে যোগ হয়েছে!");
+      
+      document.getElementById('q-title').value = '';
+      document.getElementById('opt-1').value = '';
+      document.getElementById('opt-2').value = '';
+      document.getElementById('opt-3').value = '';
+      document.getElementById('opt-4').value = '';
+      document.getElementById('correct-opt').value = '';
+      document.getElementById('exp-input').value = '';
     }
   </script>
 </body>
