@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exam Master Pro</title>
+  <title>Exam Master - প্রস্তুতি হোক স্মার্ট</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   
@@ -11,158 +11,372 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
-<body class="bg-[#0D1117] text-white font-sans select-none min-h-screen pb-20">
+<body class="bg-[#0B0F17] text-white font-sans select-none min-h-screen pb-24">
 
   <!-- TOP HEADER -->
-  <header class="sticky top-0 bg-[#0D1117]/90 backdrop-blur-md z-40 px-4 py-3 border-b border-gray-800 flex justify-between items-center">
-    <div class="flex items-center space-x-2">
-      <div class="bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">EM</div>
-      <span class="font-bold text-lg">Exam Master</span>
+  <header class="sticky top-0 bg-[#0B0F17]/90 backdrop-blur-md z-40 px-4 py-3 border-b border-gray-800/80 flex justify-between items-center">
+    <div class="flex items-center space-x-2.5">
+      <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm shadow-lg shadow-blue-500/20">EM</div>
+      <div>
+        <h1 class="font-bold text-sm leading-none">Exam Master</h1>
+        <span class="text-[10px] text-gray-400">প্রস্তুতি হোক স্মার্ট, সফলতা হোক নিশ্চিত</span>
+      </div>
     </div>
-    <div id="live-timer" class="hidden bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs px-3 py-1 rounded-full font-semibold items-center">
-      <i class="fa-regular fa-clock mr-1 animate-pulse"></i><span id="timer-text">১০:০০</span>
+    <div class="flex items-center space-x-2">
+      <button class="w-8 h-8 bg-gray-800/60 rounded-full flex items-center justify-center text-gray-300 text-xs"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="w-8 h-8 bg-gray-800/60 rounded-full flex items-center justify-center text-amber-400 text-xs"><i class="fa-solid fa-sun"></i></button>
+      <button class="w-8 h-8 bg-gray-800/60 rounded-full flex items-center justify-center text-rose-400 text-xs relative">
+        <i class="fa-solid fa-bell"></i>
+        <span class="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full"></span>
+      </button>
     </div>
   </header>
 
-  <!-- MAIN APP CONTAINER -->
+  <!-- MAIN CONTENT CONTAINER -->
   <main class="max-w-md mx-auto p-4 space-y-5">
 
-    <!-- HOME DASHBOARD -->
+    <!-- 1. HOME VIEW -->
     <div id="view-home" class="space-y-4">
-      <div class="bg-[#161B22] p-4 rounded-2xl border border-gray-800 flex justify-between items-center">
-        <div>
-          <span class="text-xs text-gray-400">স্বাগতম,</span>
-          <h2 class="text-base font-bold">প্রো স্টুডেন্ট 👋</h2>
+      <!-- Stats Cards Grid -->
+      <div class="grid grid-cols-4 gap-2 text-center">
+        <div class="bg-[#131924] p-2.5 rounded-xl border border-gray-800/80">
+          <i class="fa-solid fa-fire text-amber-500 text-sm mb-1"></i>
+          <p class="text-xs font-bold">১২ দিন</p>
+          <p class="text-[9px] text-gray-400">স্ট্রাইক</p>
         </div>
-        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold">EM</div>
+        <div class="bg-[#131924] p-2.5 rounded-xl border border-gray-800/80">
+          <i class="fa-solid fa-file-lines text-blue-400 text-sm mb-1"></i>
+          <p class="text-xs font-bold">২৪ টি</p>
+          <p class="text-[9px] text-gray-400">পরীক্ষা</p>
+        </div>
+        <div class="bg-[#131924] p-2.5 rounded-xl border border-gray-800/80">
+          <i class="fa-solid fa-trophy text-purple-400 text-sm mb-1"></i>
+          <p class="text-xs font-bold">৮ম</p>
+          <p class="text-[9px] text-gray-400">র‍্যাংকিং</p>
+        </div>
+        <div class="bg-[#131924] p-2.5 rounded-xl border border-gray-800/80">
+          <i class="fa-solid fa-[#000] text-emerald-400 text-sm mb-1">🎯</i>
+          <p class="text-xs font-bold">৮৯%</p>
+          <p class="text-[9px] text-gray-400">নির্ভুলতা</p>
+        </div>
       </div>
 
-      <!-- Hero Banner -->
-      <div class="bg-gradient-to-r from-blue-700 to-indigo-800 p-5 rounded-2xl border border-blue-500/30">
-        <span class="bg-amber-400 text-black text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">Live Exam</span>
-        <h3 class="text-lg font-bold mt-1">ডেইলি চ্যালেঞ্জ</h3>
-        <p class="text-xs text-gray-300 mb-3">লাইভ কুইজে অংশ নাও এবং লিডারবোর্ডে ফার্স্ট হও!</p>
-        <button onclick="startQuiz()" class="bg-amber-400 text-black text-xs font-bold px-4 py-2 rounded-xl">পরীক্ষা দাও 🚀</button>
+      <!-- Banner Challenge -->
+      <div class="bg-gradient-to-r from-amber-600/20 via-amber-500/10 to-transparent p-4 rounded-2xl border border-amber-500/30 flex justify-between items-center">
+        <div>
+          <span class="text-amber-400 text-xs font-bold flex items-center gap-1"><i class="fa-solid fa-fire"></i> আজকের চ্যালেঞ্জ 🔥</span>
+          <p class="text-[10px] text-gray-300 mt-0.5">১০টি প্রশ্ন • ১০ মিনিট • ৭,৮৩৭ জন অংশগ্রহণকারী</p>
+        </div>
+        <button onclick="switchTab('exam')" class="bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs px-3 py-2 rounded-xl transition">চ্যালেঞ্জ নিন</button>
       </div>
 
       <!-- Categories -->
-      <h3 class="text-sm font-bold text-gray-300 pt-2">ক্যাটাগরি</h3>
+      <div class="flex justify-between items-center pt-1">
+        <h2 class="text-xs font-bold text-gray-300 border-l-2 border-blue-500 pl-2">আপনার ক্যাটাগরি</h2>
+        <span class="text-[10px] text-blue-400">সকল দেখুন</span>
+      </div>
+
       <div class="grid grid-cols-2 gap-3">
-        <div onclick="startQuiz()" class="bg-[#161B22] p-4 rounded-xl border border-gray-800 cursor-pointer hover:border-blue-500/50">
-          <i class="fa-solid fa-graduation-cap text-2xl text-blue-500 mb-1"></i>
-          <h4 class="font-bold text-sm">HSC প্রস্তুতি</h4>
+        <div onclick="switchTab('practice')" class="bg-[#131924] p-3.5 rounded-xl border border-gray-800/80 flex items-center space-x-3 cursor-pointer hover:border-blue-500/50">
+          <div class="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div><h3 class="text-xs font-bold">HSC প্রস্তুতি</h3><p class="text-[10px] text-gray-400">৪৫+ পরীক্ষা</p></div>
         </div>
-        <div onclick="startQuiz()" class="bg-[#161B22] p-4 rounded-xl border border-gray-800 cursor-pointer hover:border-amber-500/50">
-          <i class="fa-solid fa-building-columns text-2xl text-amber-500 mb-1"></i>
-          <h4 class="font-bold text-sm">ভর্তি পরীক্ষা</h4>
+        <div onclick="switchTab('practice')" class="bg-[#131924] p-3.5 rounded-xl border border-gray-800/80 flex items-center space-x-3 cursor-pointer hover:border-amber-500/50">
+          <div class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400"><i class="fa-solid fa-building-columns"></i></div>
+          <div><h3 class="text-xs font-bold">বিশ্ববিদ্যালয় ভর্তি</h3><p class="text-[10px] text-gray-400">৬০+ পরীক্ষা</p></div>
+        </div>
+        <div onclick="switchTab('practice')" class="bg-[#131924] p-3.5 rounded-xl border border-gray-800/80 flex items-center space-x-3 cursor-pointer hover:border-emerald-500/50">
+          <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400"><i class="fa-solid fa-flask"></i></div>
+          <div><h3 class="text-xs font-bold">GST গুচ্ছ ভর্তি</h3><p class="text-[10px] text-gray-400">৩৫+ পরীক্ষা</p></div>
+        </div>
+        <div onclick="switchTab('practice')" class="bg-[#131924] p-3.5 rounded-xl border border-gray-800/80 flex items-center space-x-3 cursor-pointer hover:border-rose-500/50">
+          <div class="w-9 h-9 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400"><i class="fa-solid fa-notes-medical"></i></div>
+          <div><h3 class="text-xs font-bold">মেডিকেল ভর্তি</h3><p class="text-[10px] text-gray-400">৪০+ পরীক্ষা</p></div>
         </div>
       </div>
     </div>
 
-    <!-- LIVE QUIZ SCREEN -->
-    <div id="view-quiz" class="space-y-4 hidden">
+    <!-- 2. PRACTICE VIEW (বিষয় তালিকা) -->
+    <div id="view-practice" class="space-y-4 hidden">
+      <div class="bg-[#131924] p-4 rounded-2xl border border-gray-800/80">
+        <span class="text-[10px] text-blue-400 font-semibold">প্রস্তুতিমূলক বিষয় নির্বাচন</span>
+        <h2 class="text-sm font-bold text-white mt-0.5">বিষয় তালিকা</h2>
+      </div>
+
+      <div class="space-y-2.5">
+        <!-- Physics -->
+        <div class="bg-[#131924] p-3.5 rounded-xl border border-gray-800/80 space-y-2">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 text-xs"><i class="fa-solid fa-book"></i></div>
+              <div>
+                <h4 class="text-xs font-bold">পদার্থবিজ্ঞান (১ম ও ২য় পত্র)</h4>
+                <p class="text-[10px] text-gray-400">১০টি অধ্যায় • ৩২০টি প্রশ্ন</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold text-gray-400">১৪%</span>
+          </div>
+          <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-blue-500 h-full rounded-full" style="width: 14%"></div>
+          </div>
+        </div>
+
+        <!-- Chemistry -->
+        <div class="bg-[#131924] p-3.5 rounded-xl border border-gray-800/80 space-y-2">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xs"><i class="fa-solid fa-flask"></i></div>
+              <div>
+                <h4 class="text-xs font-bold">রসায়ন (১ম ও ২য় পত্র)</h4>
+                <p class="text-[10px] text-gray-400">১০টি অধ্যায় • ২৯০টি প্রশ্ন</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold text-gray-400">১৩%</span>
+          </div>
+          <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-emerald-500 h-full rounded-full" style="width: 13%"></div>
+          </div>
+        </div>
+
+        <!-- Higher Math -->
+        <div class="bg-[#131924] p-3.5 rounded-xl border border-gray-800/80 space-y-2">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 text-xs"><i class="fa-solid fa-calculator"></i></div>
+              <div>
+                <h4 class="text-xs font-bold">উচ্চতর গণিত (১ম ও ২য় পত্র)</h4>
+                <p class="text-[10px] text-gray-400">১০টি অধ্যায় • ২৪০টি প্রশ্ন</p>
+              </div>
+            </div>
+            <span class="text-xs font-bold text-gray-400">১০%</span>
+          </div>
+          <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+            <div class="bg-purple-500 h-full rounded-full" style="width: 10%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. EXAM VIEW (অনলাইন পরীক্ষা) -->
+    <div id="view-exam" class="space-y-4 hidden">
+      <div class="flex space-x-2 border-b border-gray-800 pb-2 text-xs overflow-x-auto">
+        <button class="bg-blue-600 text-white px-3 py-1.5 rounded-lg whitespace-nowrap">সবগুলো</button>
+        <button class="bg-[#131924] text-gray-400 px-3 py-1.5 rounded-lg whitespace-nowrap">লাইভ পরীক্ষা</button>
+        <button class="bg-[#131924] text-gray-400 px-3 py-1.5 rounded-lg whitespace-nowrap">মডেল টেস্ট</button>
+      </div>
+
+      <!-- Exam Item 1 -->
+      <div class="bg-[#131924] p-4 rounded-xl border border-gray-800/80 space-y-3">
+        <div class="flex justify-between items-center">
+          <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] px-2 py-0.5 rounded-md font-bold">🔥 ডেইলি চ্যালেঞ্জ</span>
+          <span class="text-[10px] text-gray-400"><i class="fa-solid fa-users mr-1"></i>১৪২৮০ জন</span>
+        </div>
+        <h3 class="text-xs font-bold">আজকের ডেইলি চ্যালেঞ্জ (পদার্থবিজ্ঞান ও সাধারণ জ্ঞান)</h3>
+        <div class="flex items-center space-x-4 text-[10px] text-gray-400">
+          <span><i class="fa-regular fa-file-lines mr-1"></i>১০টি প্রশ্ন</span>
+          <span><i class="fa-regular fa-clock mr-1"></i>১০ মি.</span>
+          <span><i class="fa-regular fa-star mr-1"></i>১০ নম্বর</span>
+        </div>
+        <button onclick="startLiveQuiz()" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-2 rounded-xl text-xs transition">পরীক্ষা শুরু করুন</button>
+      </div>
+
+      <!-- Exam Item 2 -->
+      <div class="bg-[#131924] p-4 rounded-xl border border-gray-800/80 space-y-3">
+        <div class="flex justify-between items-center">
+          <span class="bg-blue-500/10 text-blue-400 border border-blue-500/30 text-[10px] px-2 py-0.5 rounded-md font-bold">📊 মডেল টেস্ট</span>
+          <span class="text-[10px] text-gray-400"><i class="fa-solid fa-users mr-1"></i>৬৮৪০ জন</span>
+        </div>
+        <h3 class="text-xs font-bold">এইচএসসি পদার্থবিজ্ঞান ১ম পত্র - সম্পূর্ণ মডেল টেস্ট ১</h3>
+        <div class="flex items-center space-x-4 text-[10px] text-gray-400">
+          <span><i class="fa-regular fa-file-lines mr-1"></i>২৫টি প্রশ্ন</span>
+          <span><i class="fa-regular fa-clock mr-1"></i>২৫ মি.</span>
+          <span><i class="fa-regular fa-star mr-1"></i>২৫ নম্বর</span>
+        </div>
+        <button onclick="startLiveQuiz()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-xl text-xs transition">পরীক্ষা শুরু করুন</button>
+      </div>
+    </div>
+
+    <!-- 4. LEADERBOARD VIEW -->
+    <div id="view-leaderboard" class="space-y-4 hidden">
+      <div class="text-center space-y-1">
+        <span class="text-[10px] text-gray-400">শীর্ষ মেধা তালিকা</span>
+        <h2 class="text-sm font-bold">লিডারবোর্ড (Leaderboard)</h2>
+      </div>
+
+      <!-- Podium Top 3 -->
+      <div class="grid grid-cols-3 gap-2 items-end pt-4 pb-2 text-center">
+        <!-- 2nd -->
+        <div class="bg-[#131924] p-2.5 rounded-t-xl border border-gray-800/80 space-y-1">
+          <div class="w-10 h-10 mx-auto bg-gray-700 rounded-full flex items-center justify-center font-bold text-xs">টি</div>
+          <p class="text-[10px] font-bold truncate">তাহমিদ রান</p>
+          <span class="text-[9px] text-gray-400">৭২০ pts</span>
+          <div class="bg-gray-800 text-gray-300 font-bold text-xs py-1 rounded mt-1">#২</div>
+        </div>
+        <!-- 1st -->
+        <div class="bg-gradient-to-b from-amber-500/20 to-[#131924] p-3 rounded-t-xl border border-amber-500/40 space-y-1">
+          <i class="fa-solid fa-crown text-amber-400 text-base"></i>
+          <div class="w-12 h-12 mx-auto bg-amber-500 rounded-full flex items-center justify-center font-bold text-black text-sm">ত</div>
+          <p class="text-xs font-bold truncate">তানভীর আহমেদ</p>
+          <span class="text-[10px] text-amber-400 font-bold">৭৩৫ pts</span>
+          <div class="bg-amber-500 text-black font-bold text-xs py-1 rounded mt-1">#১</div>
+        </div>
+        <!-- 3rd -->
+        <div class="bg-[#131924] p-2.5 rounded-t-xl border border-gray-800/80 space-y-1">
+          <div class="w-10 h-10 mx-auto bg-amber-700/50 rounded-full flex items-center justify-center font-bold text-xs">উ</div>
+          <p class="text-[10px] font-bold truncate">উমাইর (আপনি)</p>
+          <span class="text-[9px] text-gray-400">১১৯ pts</span>
+          <div class="bg-amber-900/40 text-amber-500 font-bold text-xs py-1 rounded mt-1">#৩</div>
+        </div>
+      </div>
+
+      <!-- User Current Rank -->
+      <div class="bg-blue-600/20 border border-blue-500/50 p-3 rounded-xl flex justify-between items-center text-xs">
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-blue-400">#৩</span>
+          <span>মো: ফয়সাল উদ্দীন (আপনি)</span>
+        </div>
+        <span class="font-bold text-blue-400">১১৯ pts</span>
+      </div>
+    </div>
+
+    <!-- 5. PROFILE VIEW -->
+    <div id="view-profile" class="space-y-4 hidden">
+      <!-- Profile Header -->
+      <div class="bg-[#131924] p-4 rounded-2xl border border-gray-800/80 text-center space-y-2">
+        <div class="w-16 h-16 bg-blue-600 rounded-full mx-auto flex items-center justify-center font-bold text-xl border-2 border-blue-400">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <h3 class="font-bold text-sm">মো: ফয়সাল উদ্দীন</h3>
+        <p class="text-[10px] text-gray-400">foisaluddin323@gmail.com</p>
+        <span class="inline-block bg-blue-500/10 text-blue-400 border border-blue-500/30 text-[10px] px-2.5 py-0.5 rounded-full">ঢাকা বিশ্ববিদ্যালয় • HSC & ভর্তি</span>
+      </div>
+
+      <!-- Options -->
+      <div class="bg-[#131924] rounded-2xl border border-gray-800/80 divide-y divide-gray-800/60 text-xs">
+        <div class="p-3.5 flex justify-between items-center cursor-pointer">
+          <span class="flex items-center"><i class="fa-regular fa-bookmark mr-2.5 text-amber-400"></i> সংরক্ষিত প্রশ্ন (Bookmarks)</span>
+          <i class="fa-solid fa-angle-right text-gray-500"></i>
+        </div>
+        <div class="p-3.5 flex justify-between items-center cursor-pointer">
+          <span class="flex items-center"><i class="fa-solid fa-circle-exclamation mr-2.5 text-rose-400"></i> ভুল প্রশ্নসমূহ (Wrong Questions)</span>
+          <i class="fa-solid fa-angle-right text-gray-500"></i>
+        </div>
+        <div class="p-3.5 flex justify-between items-center cursor-pointer">
+          <span class="flex items-center"><i class="fa-solid fa-book-open mr-2.5 text-blue-400"></i> স্টাডি নোটস (Study Notes)</span>
+          <i class="fa-solid fa-angle-right text-gray-500"></i>
+        </div>
+        <div class="p-3.5 flex justify-between items-center cursor-pointer">
+          <span class="flex items-center"><i class="fa-solid fa-clock-rotate-left mr-2.5 text-emerald-400"></i> পরীক্ষার ইতিহাস (Exam History)</span>
+          <i class="fa-solid fa-angle-right text-gray-500"></i>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="bg-[#131924] rounded-2xl border border-gray-800/80 p-3.5 space-y-3 text-xs">
+        <div class="flex justify-between items-center">
+          <span class="flex items-center"><i class="fa-solid fa-moon mr-2.5 text-indigo-400"></i> ডার্ক মোড (Dark Mode)</span>
+          <input type="checkbox" checked class="toggle">
+        </div>
+        <div class="flex justify-between items-center cursor-pointer border-t border-gray-800/60 pt-3">
+          <span class="flex items-center"><i class="fa-solid fa-user-gear mr-2.5 text-amber-400"></i> এডমিন প্যানেল (Admin Panel)</span>
+          <i class="fa-solid fa-angle-right text-gray-500"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ INTERFACE (When starting an exam) -->
+    <div id="view-quiz-active" class="space-y-4 hidden">
       <div class="flex justify-between items-center text-xs text-gray-400">
-        <span id="q-counter">প্রশ্ন ১ / ১</span>
-        <span class="bg-blue-900/40 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded">MCQ Exam</span>
+        <span id="q-counter">প্রশ্ন ১ / ৫</span>
+        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded text-[10px]">১০:০০ মি.</span>
       </div>
 
-      <!-- Question Card -->
-      <div class="bg-[#161B22] p-5 rounded-2xl border border-gray-800 space-y-4">
-        <h3 id="q-text" class="text-base font-medium">প্রশ্ন লোড হচ্ছে...</h3>
-        <div id="options-list" class="space-y-2.5"></div>
+      <div class="bg-[#131924] p-5 rounded-2xl border border-gray-800/80 space-y-4">
+        <h3 id="q-text" class="text-sm font-medium leading-relaxed">প্রশ্ন লোড হচ্ছে...</h3>
+        <div id="options-list" class="space-y-2"></div>
       </div>
 
-      <!-- Explanation Box -->
-      <div id="explanation-box" class="hidden bg-[#161B22] p-4 rounded-2xl border border-emerald-500/40 space-y-1">
+      <div id="explanation-box" class="hidden bg-[#131924] p-4 rounded-2xl border border-emerald-500/40 space-y-1">
         <span class="text-emerald-400 font-bold text-xs"><i class="fa-solid fa-lightbulb"></i> ব্যাখ্যা:</span>
         <p id="exp-text" class="text-xs text-gray-300"></p>
       </div>
 
       <div class="flex space-x-3">
-        <button id="btn-check" onclick="checkAnswer()" class="w-full bg-blue-600 font-bold py-3 rounded-xl text-sm">উত্তর সাবমিট করুন</button>
-        <button id="btn-next" onclick="nextQuestion()" class="hidden w-full bg-emerald-600 font-bold py-3 rounded-xl text-sm">পরবর্তী প্রশ্ন</button>
-      </div>
-    </div>
-
-    <!-- RESULT SCREEN -->
-    <div id="view-result" class="space-y-4 hidden text-center">
-      <div class="bg-[#161B22] p-6 rounded-2xl border border-gray-800 space-y-3">
-        <i class="fa-solid fa-award text-4xl text-amber-400"></i>
-        <h3 class="text-lg font-bold">পরীক্ষা সম্পন্ন!</h3>
-        <p class="text-3xl font-extrabold text-blue-400" id="final-score">0 / 0</p>
-      </div>
-      <button onclick="switchTab('home')" class="w-full bg-blue-600 font-bold py-3 rounded-xl text-sm">হোমে ফিরে যান</button>
-    </div>
-
-    <!-- LEADERBOARD VIEW -->
-    <div id="view-leaderboard" class="space-y-3 hidden">
-      <h3 class="text-sm font-bold">শীর্ষ মেধা তালিকা</h3>
-      <div class="bg-[#161B22] p-4 rounded-xl border border-gray-800 space-y-2">
-        <div class="flex justify-between items-center p-2 rounded bg-amber-500/10 border border-amber-500/20 text-xs">
-          <span><strong>#১</strong> তানভীর আহমেদ</span>
-          <span class="text-amber-400 font-bold">৭৩৫ pts</span>
-        </div>
+        <button id="btn-check" onclick="checkAnswer()" class="w-full bg-blue-600 hover:bg-blue-500 font-bold py-3 rounded-xl text-xs transition">উত্তর সাবমিট করুন</button>
+        <button id="btn-next" onclick="nextQuestion()" class="hidden w-full bg-emerald-600 hover:bg-emerald-500 font-bold py-3 rounded-xl text-xs transition">পরবর্তী প্রশ্ন</button>
       </div>
     </div>
 
   </main>
 
-  <!-- BOTTOM NAVBAR -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-[#161B22] border-t border-gray-800 py-2.5 px-4 z-50">
+  <!-- BOTTOM NAVIGATION BAR -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-[#0B0F17]/95 backdrop-blur-lg border-t border-gray-800/80 py-2 px-3 z-50">
     <div class="max-w-md mx-auto flex justify-around text-gray-400 text-[10px]">
-      <button onclick="switchTab('home')" class="flex flex-col items-center text-blue-500"><i class="fa-solid fa-house text-lg"></i>হোম</button>
-      <button onclick="startQuiz()" class="flex flex-col items-center"><i class="fa-solid fa-pen-to-square text-lg"></i>পরীক্ষা</button>
-      <button onclick="switchTab('leaderboard')" class="flex flex-col items-center"><i class="fa-solid fa-trophy text-lg"></i>লিডারবোর্ড</button>
+      <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center space-y-1 text-blue-500">
+        <i class="fa-solid fa-house text-base"></i><span>হোম</span>
+      </button>
+      <button onclick="switchTab('practice')" id="nav-practice" class="flex flex-col items-center space-y-1 hover:text-blue-400">
+        <i class="fa-solid fa-book-open text-base"></i><span>অনুশীলন</span>
+      </button>
+      <button onclick="switchTab('exam')" id="nav-exam" class="flex flex-col items-center space-y-1 hover:text-blue-400">
+        <i class="fa-solid fa-pen-to-square text-base"></i><span>পরীক্ষা</span>
+      </button>
+      <button onclick="switchTab('leaderboard')" id="nav-leaderboard" class="flex flex-col items-center space-y-1 hover:text-blue-400">
+        <i class="fa-solid fa-trophy text-base"></i><span>লিডারবোর্ড</span>
+      </button>
+      <button onclick="switchTab('profile')" id="nav-profile" class="flex flex-col items-center space-y-1 hover:text-blue-400">
+        <i class="fa-solid fa-user text-base"></i><span>প্রোফাইল</span>
+      </button>
     </div>
   </nav>
 
   <script>
-    // Firebase Config Integrated
-    const firebaseConfig = {
-      apiKey: "AIzaSyDCySLZa-YB4LFeLvWPvqDEoOisv3VFTKU",
-      authDomain: "exam-master-ac699.firebaseapp.com",
-      databaseURL: "https://exam-master-ac699-default-rtdb.firebaseio.com",
-      projectId: "exam-master-ac699",
-      storageBucket: "exam-master-ac699.firebasestorage.app",
-      messagingSenderId: "249955180474",
-      appId: "1:249955180474:web:54762c3a1fda4eaa26c783",
-      measurementId: "G-XM9361MWQJ"
-    };
+    // Tab Navigation Switcher
+    function switchTab(tabId) {
+      const tabs = ['home', 'practice', 'exam', 'leaderboard', 'profile', 'quiz-active'];
+      tabs.forEach(t => {
+        const el = document.getElementById('view-' + t);
+        if(el) el.classList.add('hidden');
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+        const navEl = document.getElementById('nav-' + t);
+        if(navEl) navEl.classList.remove('text-blue-500');
+      });
 
+      const target = document.getElementById('view-' + tabId);
+      if(target) target.classList.remove('hidden');
+
+      const activeNav = document.getElementById('nav-' + tabId);
+      if(activeNav) activeNav.classList.add('text-blue-500');
+    }
+
+    // Quiz Questions Data
     let questionsDB = [
       {
-        q: "দুটি সমান মানের ভেক্টর কত কোণে ক্রিয়া করলে লব্ধি যেকোনো একটি ভেক্টরের সমান হবে?",
+        q: "দুটি সমান মানের ভেক্টর কত কোণে ক্রিয়া করলে লব্ধি যেকোনো একটি ভেক্টরের সমান হবে?",
         options: ["৯০°", "৬০°", "১২০°", "১৮০°"],
         correct: 2,
-        explanation: "R² = P² + Q² + 2PQ cosα সূত্র থেকে α = ১২০° পাওয়া যায়।"
+        explanation: "R² = P² + Q² + 2PQ cosα সূত্র থেকে α = ১২০° পাওয়া যায়।"
+      },
+      {
+        q: "প্লাঙ্ক-এর ধ্রুবক (Planck's constant) এর একক কোনটি?",
+        options: ["J s", "J/s", "J s⁻²", "N m"],
+        correct: 0,
+        explanation: "E = hν থেকে, h = E / ν = Joule × sec = J s।"
+      },
+      {
+        q: "শব্দের বেগ সবচেয়ে বেশি কোন মাধ্যমে?",
+        options: ["বায়ু", "পানি", "কঠিন (লোহা)", "শূন্যস্থান"],
+        correct: 2,
+        explanation: "ঘনত্ব ও স্থিতিস্থাপকতা বেশি হওয়ায় কঠিন মাধ্যমে শব্দের বেগ সবচেয়ে বেশি।"
       }
     ];
 
-    // Firebase live question fetch
-    db.ref('questions').on('value', (snapshot) => {
-      const data = snapshot.val();
-      if(data) questionsDB = Object.values(data);
-    });
-
     let currentQIdx = 0;
     let selectedOpt = null;
-    let score = 0;
 
-    function switchTab(tabId) {
-      document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
-      document.getElementById('view-' + tabId).classList.remove('hidden');
-      document.getElementById('live-timer').classList.add('hidden');
-    }
-
-    function startQuiz() {
-      switchTab('quiz');
-      document.getElementById('live-timer').classList.remove('hidden');
-      document.getElementById('live-timer').classList.add('flex');
+    function startLiveQuiz() {
+      switchTab('quiz-active');
       currentQIdx = 0;
-      score = 0;
       renderQuestion();
     }
 
@@ -180,7 +394,7 @@
 
       q.options.forEach((opt, i) => {
         optList.innerHTML += `
-          <button onclick="selectOption(${i})" class="opt-btn w-full text-left p-3.5 rounded-xl bg-[#0D1117] border border-gray-800 text-xs text-gray-300" data-idx="${i}">
+          <button onclick="selectOption(${i})" class="opt-btn w-full text-left p-3 rounded-xl bg-[#0B0F17] border border-gray-800 text-xs text-gray-300 hover:border-gray-700" data-idx="${i}">
             <strong class="mr-2 text-gray-500">${String.fromCharCode(65 + i)}.</strong> ${opt}
           </button>
         `;
@@ -191,8 +405,8 @@
       selectedOpt = idx;
       document.querySelectorAll('.opt-btn').forEach((btn, i) => {
         btn.className = (i === idx) 
-          ? "opt-btn w-full text-left p-3.5 rounded-xl bg-blue-900/30 border border-blue-500 text-xs text-blue-300" 
-          : "opt-btn w-full text-left p-3.5 rounded-xl bg-[#0D1117] border border-gray-800 text-xs text-gray-300";
+          ? "opt-btn w-full text-left p-3 rounded-xl bg-blue-900/30 border border-blue-500 text-xs text-blue-300" 
+          : "opt-btn w-full text-left p-3 rounded-xl bg-[#0B0F17] border border-gray-800 text-xs text-gray-300";
       });
     }
 
@@ -202,11 +416,10 @@
       const optBtns = document.querySelectorAll('.opt-btn');
 
       if (selectedOpt === q.correct) {
-        score++;
-        optBtns[selectedOpt].className = "opt-btn w-full text-left p-3.5 rounded-xl bg-emerald-900/40 border border-emerald-500 text-xs text-emerald-300";
+        optBtns[selectedOpt].className = "opt-btn w-full text-left p-3 rounded-xl bg-emerald-900/40 border border-emerald-500 text-xs text-emerald-300";
       } else {
-        optBtns[selectedOpt].className = "opt-btn w-full text-left p-3.5 rounded-xl bg-rose-900/40 border border-rose-500 text-xs text-rose-300";
-        optBtns[q.correct].className = "opt-btn w-full text-left p-3.5 rounded-xl bg-emerald-900/40 border border-emerald-500 text-xs text-emerald-300";
+        optBtns[selectedOpt].className = "opt-btn w-full text-left p-3 rounded-xl bg-rose-900/40 border border-rose-500 text-xs text-rose-300";
+        optBtns[q.correct].className = "opt-btn w-full text-left p-3 rounded-xl bg-emerald-900/40 border border-emerald-500 text-xs text-emerald-300";
       }
 
       document.getElementById('exp-text').innerText = q.explanation;
@@ -220,8 +433,8 @@
         currentQIdx++;
         renderQuestion();
       } else {
-        switchTab('result');
-        document.getElementById('final-score').innerText = `${score} / ${questionsDB.length}`;
+        alert('পরীক্ষা শেষ হয়েছে!');
+        switchTab('home');
       }
     }
   </script>
