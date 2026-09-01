@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Master Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body class="bg-[#0D1117] text-white font-sans select-none min-h-screen pb-20">
+
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 bg-[#0D1117]/90 backdrop-blur-md z-40 px-4 py-3 border-b border-gray-800 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <div class="bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm">EM</div>
+      <span class="font-bold text-lg">Exam Master</span>
+    </div>
+    <div id="live-timer" class="hidden bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs px-3 py-1 rounded-full font-semibold items-center">
+      <i class="fa-regular fa-clock mr-1 animate-pulse"></i><span id="timer-text">১০:০০</span>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="max-w-md mx-auto p-4 space-y-5">
+
+    <!-- HOME DASHBOARD -->
+    <div id="view-home" class="space-y-4">
+      <div class="bg-[#161B22] p-4 rounded-2xl border border-gray-800 flex justify-between items-center">
+        <div>
+          <span class="text-xs text-gray-400">স্বাগতম,</span>
+          <h2 class="text-base font-bold">প্রো স্টুডেন্ট 👋</h2>
+        </div>
+        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold">EM</div>
+      </div>
+
+      <!-- Hero Banner -->
+      <div class="bg-gradient-to-r from-blue-700 to-indigo-800 p-5 rounded-2xl border border-blue-500/30">
+        <span class="bg-amber-400 text-black text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">Live Exam</span>
+        <h3 class="text-lg font-bold mt-1">ডেইলি চ্যালেঞ্জ</h3>
+        <p class="text-xs text-gray-300 mb-3">লাইভ কুইজে অংশ নাও এবং লিডারবোর্ডে ফার্স্ট হও!</p>
+        <button onclick="startQuiz()" class="bg-amber-400 text-black text-xs font-bold px-4 py-2 rounded-xl">পরীক্ষা দাও 🚀</button>
+      </div>
+
+      <!-- Categories -->
+      <h3 class="text-sm font-bold text-gray-300 pt-2">ক্যাটাগরি</h3>
+      <div class="grid grid-cols-2 gap-3">
+        <div onclick="startQuiz()" class="bg-[#161B22] p-4 rounded-xl border border-gray-800 cursor-pointer hover:border-blue-500/50">
+          <i class="fa-solid fa-graduation-cap text-2xl text-blue-500 mb-1"></i>
+          <h4 class="font-bold text-sm">HSC প্রস্তুতি</h4>
+        </div>
+        <div onclick="startQuiz()" class="bg-[#161B22] p-4 rounded-xl border border-gray-800 cursor-pointer hover:border-amber-500/50">
+          <i class="fa-solid fa-building-columns text-2xl text-amber-500 mb-1"></i>
+          <h4 class="font-bold text-sm">ভর্তি পরীক্ষা</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE QUIZ SCREEN -->
+    <div id="view-quiz" class="space-y-4 hidden">
+      <div class="flex justify-between items-center text-xs text-gray-400">
+        <span id="q-counter">প্রশ্ন ১ / ১</span>
+        <span class="bg-blue-900/40 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded">MCQ Exam</span>
+      </div>
+
+      <!-- Question Card -->
+      <div class="bg-[#161B22] p-5 rounded-2xl border border-gray-800 space-y-4">
+        <h3 id="q-text" class="text-base font-medium">প্রশ্ন লোড হচ্ছে...</h3>
+        <div id="options-list" class="space-y-2.5"></div>
+      </div>
+
+      <!-- Explanation Box -->
+      <div id="explanation-box" class="hidden bg-[#161B22] p-4 rounded-2xl border border-emerald-500/40 space-y-1">
+        <span class="text-emerald-400 font-bold text-xs"><i class="fa-solid fa-lightbulb"></i> ব্যাখ্যা:</span>
+        <p id="exp-text" class="text-xs text-gray-300"></p>
+      </div>
+
+      <div class="flex space-x-3">
+        <button id="btn-check" onclick="checkAnswer()" class="w-full bg-blue-600 font-bold py-3 rounded-xl text-sm">উত্তর সাবমিট করুন</button>
+        <button id="btn-next" onclick="nextQuestion()" class="hidden w-full bg-emerald-600 font-bold py-3 rounded-xl text-sm">পরবর্তী প্রশ্ন</button>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="view-result" class="space-y-4 hidden text-center">
+      <div class="bg-[#161B22] p-6 rounded-2xl border border-gray-800 space-y-3">
+        <i class="fa-solid fa-award text-4xl text-amber-400"></i>
+        <h3 class="text-lg font-bold">পরীক্ষা সম্পন্ন!</h3>
+        <p class="text-3xl font-extrabold text-blue-400" id="final-score">0 / 0</p>
+      </div>
+      <button onclick="switchTab('home')" class="w-full bg-blue-600 font-bold py-3 rounded-xl text-sm">হোমে ফিরে যান</button>
+    </div>
+
+    <!-- LEADERBOARD VIEW -->
+    <div id="view-leaderboard" class="space-y-3 hidden">
+      <h3 class="text-sm font-bold">শীর্ষ মেধা তালিকা</h3>
+      <div class="bg-[#161B22] p-4 rounded-xl border border-gray-800 space-y-2">
+        <div class="flex justify-between items-center p-2 rounded bg-amber-500/10 border border-amber-500/20 text-xs">
+          <span><strong>#১</strong> তানভীর আহমেদ</span>
+          <span class="text-amber-400 font-bold">৭৩৫ pts</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAVBAR -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-[#161B22] border-t border-gray-800 py-2.5 px-4 z-50">
+    <div class="max-w-md mx-auto flex justify-around text-gray-400 text-[10px]">
+      <button onclick="switchTab('home')" class="flex flex-col items-center text-blue-500"><i class="fa-solid fa-house text-lg"></i>হোম</button>
+      <button onclick="startQuiz()" class="flex flex-col items-center"><i class="fa-solid fa-pen-to-square text-lg"></i>পরীক্ষা</button>
+      <button onclick="switchTab('leaderboard')" class="flex flex-col items-center"><i class="fa-solid fa-trophy text-lg"></i>লিডারবোর্ড</button>
+    </div>
+  </nav>
+
+  <script>
+    // Firebase Config Integrated
+    const firebaseConfig = {
+      apiKey: "AIzaSyDCySLZa-YB4LFeLvWPvqDEoOisv3VFTKU",
+      authDomain: "exam-master-ac699.firebaseapp.com",
+      databaseURL: "https://exam-master-ac699-default-rtdb.firebaseio.com",
+      projectId: "exam-master-ac699",
+      storageBucket: "exam-master-ac699.firebasestorage.app",
+      messagingSenderId: "249955180474",
+      appId: "1:249955180474:web:54762c3a1fda4eaa26c783",
+      measurementId: "G-XM9361MWQJ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let questionsDB = [
+      {
+        q: "দুটি সমান মানের ভেক্টর কত কোণে ক্রিয়া করলে লব্ধি যেকোনো একটি ভেক্টরের সমান হবে?",
+        options: ["৯০°", "৬০°", "১২০°", "১৮০°"],
+        correct: 2,
+        explanation: "R² = P² + Q² + 2PQ cosα সূত্র থেকে α = ১২০° পাওয়া যায়।"
+      }
+    ];
+
+    // Firebase live question fetch
+    db.ref('questions').on('value', (snapshot) => {
+      const data = snapshot.val();
+      if(data) questionsDB = Object.values(data);
+    });
+
+    let currentQIdx = 0;
+    let selectedOpt = null;
+    let score = 0;
+
+    function switchTab(tabId) {
+      document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
+      document.getElementById('view-' + tabId).classList.remove('hidden');
+      document.getElementById('live-timer').classList.add('hidden');
+    }
+
+    function startQuiz() {
+      switchTab('quiz');
+      document.getElementById('live-timer').classList.remove('hidden');
+      document.getElementById('live-timer').classList.add('flex');
+      currentQIdx = 0;
+      score = 0;
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      selectedOpt = null;
+      const q = questionsDB[currentQIdx];
+      document.getElementById('q-counter').innerText = `প্রশ্ন ${currentQIdx + 1} / ${questionsDB.length}`;
+      document.getElementById('q-text').innerText = q.q;
+      document.getElementById('explanation-box').classList.add('hidden');
+      document.getElementById('btn-check').classList.remove('hidden');
+      document.getElementById('btn-next').classList.add('hidden');
+
+      const optList = document.getElementById('options-list');
+      optList.innerHTML = '';
+
+      q.options.forEach((opt, i) => {
+        optList.innerHTML += `
+          <button onclick="selectOption(${i})" class="opt-btn w-full text-left p-3.5 rounded-xl bg-[#0D1117] border border-gray-800 text-xs text-gray-300" data-idx="${i}">
+            <strong class="mr-2 text-gray-500">${String.fromCharCode(65 + i)}.</strong> ${opt}
+          </button>
+        `;
+      });
+    }
+
+    function selectOption(idx) {
+      selectedOpt = idx;
+      document.querySelectorAll('.opt-btn').forEach((btn, i) => {
+        btn.className = (i === idx) 
+          ? "opt-btn w-full text-left p-3.5 rounded-xl bg-blue-900/30 border border-blue-500 text-xs text-blue-300" 
+          : "opt-btn w-full text-left p-3.5 rounded-xl bg-[#0D1117] border border-gray-800 text-xs text-gray-300";
+      });
+    }
+
+    function checkAnswer() {
+      if (selectedOpt === null) return alert('একটি উত্তর বেছে নিন!');
+      const q = questionsDB[currentQIdx];
+      const optBtns = document.querySelectorAll('.opt-btn');
+
+      if (selectedOpt === q.correct) {
+        score++;
+        optBtns[selectedOpt].className = "opt-btn w-full text-left p-3.5 rounded-xl bg-emerald-900/40 border border-emerald-500 text-xs text-emerald-300";
+      } else {
+        optBtns[selectedOpt].className = "opt-btn w-full text-left p-3.5 rounded-xl bg-rose-900/40 border border-rose-500 text-xs text-rose-300";
+        optBtns[q.correct].className = "opt-btn w-full text-left p-3.5 rounded-xl bg-emerald-900/40 border border-emerald-500 text-xs text-emerald-300";
+      }
+
+      document.getElementById('exp-text').innerText = q.explanation;
+      document.getElementById('explanation-box').classList.remove('hidden');
+      document.getElementById('btn-check').classList.add('hidden');
+      document.getElementById('btn-next').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+      if (currentQIdx < questionsDB.length - 1) {
+        currentQIdx++;
+        renderQuestion();
+      } else {
+        switchTab('result');
+        document.getElementById('final-score').innerText = `${score} / ${questionsDB.length}`;
+      }
+    }
+  </script>
+</body>
+</html>
