@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exam Master - Prep Platform</title>
+  <title>Exam Master - Admission & HSC Prep Platform</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    body { background-color: #0A0E17; color: #E2E8F0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: #0B0F17; color: #E2E8F0; font-family: system-ui, -apple-system, sans-serif; }
     .card-bg { background-color: #121824; border: 1px solid #1E293B; }
     .gold-gradient { background: linear-gradient(135deg, #F59E0B, #D97706); }
-    .active-tab { color: #38BDF8; }
+    .active-tab { color: #38BDF8; font-weight: bold; }
+    .badge-gradient { background: linear-gradient(135deg, #0EA5E9, #2563EB); }
   </style>
 </head>
 <body class="pb-20 select-none">
 
   <!-- TOP HEADER -->
-  <header class="sticky top-0 bg-[#0A0E17]/90 backdrop-blur-md z-40 px-4 py-3 border-b border-slate-800 flex justify-between items-center">
+  <header class="sticky top-0 bg-[#0B0F17]/90 backdrop-blur-md z-40 px-4 py-3 border-b border-slate-800 flex justify-between items-center">
     <div class="flex items-center space-x-2">
       <div class="w-8 h-8 rounded-lg gold-gradient flex items-center justify-center font-bold text-xs text-black">EM</div>
       <div>
@@ -24,10 +25,13 @@
         <p class="text-[9px] text-gray-400">"প্রস্তুতি হোক স্মার্ট, সফলতা হোক নিশ্চিত"</p>
       </div>
     </div>
-    <div class="flex items-center space-x-2 text-gray-400 text-sm">
-      <i class="fa-solid fa-magnifying-glass cursor-pointer"></i>
-      <i class="fa-regular fa-sun cursor-pointer"></i>
-      <i class="fa-regular fa-bell cursor-pointer"></i>
+    <div class="flex items-center space-x-3 text-gray-400 text-sm">
+      <i class="fa-solid fa-magnifying-glass cursor-pointer hover:text-white"></i>
+      <i class="fa-regular fa-sun cursor-pointer hover:text-white"></i>
+      <div onclick="switchTab('notifications')" class="relative cursor-pointer">
+        <i class="fa-regular fa-bell hover:text-white"></i>
+        <span class="absolute -top-1 -right-1 w-2 h-2 bg-rose-500 rounded-full"></span>
+      </div>
     </div>
   </header>
 
@@ -35,25 +39,36 @@
 
     <!-- 1. HOME VIEW -->
     <div id="view-home" class="space-y-4">
+      <!-- User Welcome Card -->
+      <div class="card-bg p-3 rounded-2xl flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-full badge-gradient flex items-center justify-center text-white font-bold text-xs">MR</div>
+          <div>
+            <span class="text-[9px] text-amber-400 font-bold uppercase tracking-wider">এডমিন ও প্রতিষ্ঠাতা</span>
+            <h2 class="text-xs font-bold text-white">MD RONI</h2>
+          </div>
+        </div>
+        <span class="bg-amber-500/20 text-amber-400 text-[10px] px-2 py-1 rounded-full font-bold">FU</span>
+      </div>
+
       <!-- Banner -->
       <div class="card-bg p-4 rounded-2xl relative overflow-hidden">
-        <div class="z-10 relative">
-          <h2 class="text-sm font-bold text-white">এক্সাম মাস্টার</h2>
-          <p class="text-[10px] text-gray-400 mt-0.5">প্রস্তুতি হোক স্মার্ট, সফলতা হোক নিশ্চিত</p>
-          <div class="flex space-x-2 mt-3">
-            <button onclick="switchTab('practice')" class="bg-sky-500 text-black text-[11px] font-bold px-3 py-1.5 rounded-lg flex items-center space-x-1">
-              <span>অনুশীলন শুরু</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </button>
-            <button class="border border-slate-700 text-[11px] px-3 py-1.5 rounded-lg text-gray-300">অ্যাপ ডাউনলোড</button>
-          </div>
+        <span class="text-[9px] bg-sky-500/20 text-sky-400 px-2 py-0.5 rounded font-bold">DAILY CHALLENGE LIVE</span>
+        <h2 class="text-sm font-bold text-white mt-1">এক্সাম মাস্টার</h2>
+        <p class="text-[10px] text-gray-400 mt-0.5">"প্রস্তুতি হোক স্মার্ট, সফলতা হোক নিশ্চিত"</p>
+        <div class="flex space-x-2 mt-3">
+          <button onclick="switchTab('practice')" class="bg-sky-500 text-black text-[11px] font-bold px-3 py-1.5 rounded-lg flex items-center space-x-1">
+            <span>অনুশীলন শুরু</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <button onclick="alert('অ্যাপটি ইনস্টল করতে ব্রাউজার মেনু থেকে Add to Home Screen চাপুন')" class="border border-slate-700 text-[11px] px-3 py-1.5 rounded-lg text-gray-300">অ্যাপ ডাউনলোড</button>
         </div>
       </div>
 
       <!-- Stats Grid -->
       <div class="grid grid-cols-4 gap-2 text-center text-[10px]">
         <div class="card-bg p-2 rounded-xl">
-          <p class="text-amber-500 font-bold text-xs">১২ দিন</p>
-          <p class="text-gray-400 text-[9px]">স্ট্রাইক</p>
+          <p class="text-amber-500 font-bold text-xs">১৩ দিন</p>
+          <p class="text-gray-400 text-[9px]">স্ট্রিক</p>
         </div>
         <div class="card-bg p-2 rounded-xl">
           <p class="text-sky-400 font-bold text-xs">২৫টি</p>
@@ -69,8 +84,20 @@
         </div>
       </div>
 
+      <!-- Daily Challenge Card -->
+      <div class="card-bg p-3 rounded-2xl border-amber-500/30 flex justify-between items-center">
+        <div class="space-y-1">
+          <p class="text-amber-400 font-bold text-xs">আজকের চ্যালেঞ্জ 🔥</p>
+          <p class="text-[10px] text-gray-400">১০টি প্রশ্ন • ১০ মিনিট • ৭,৮৩৭ জন অংশগ্রহণকারী</p>
+        </div>
+        <button onclick="startPractice('Daily Challenge')" class="bg-amber-500 text-black font-bold text-[10px] px-3 py-1.5 rounded-lg">চ্যালেঞ্জ নিন</button>
+      </div>
+
       <!-- Categories -->
-      <h3 class="text-xs font-bold text-gray-300">আপনার ক্যাটাগরি</h3>
+      <div class="flex justify-between items-center text-xs">
+        <h3 class="font-bold text-gray-300">আপনার ক্যাটাগরি</h3>
+        <span class="text-sky-400 text-[10px] cursor-pointer">সকল দেখুন</span>
+      </div>
       <div class="grid grid-cols-2 gap-2 text-xs">
         <div onclick="switchTab('practice')" class="card-bg p-3 rounded-xl flex items-center space-x-3 cursor-pointer">
           <i class="fa-solid fa-graduation-cap text-sky-400 text-lg"></i>
@@ -93,7 +120,10 @@
 
     <!-- 2. PRACTICE VIEW (Subject List) -->
     <div id="view-practice" class="space-y-3 hidden">
-      <h2 class="text-xs font-bold text-gray-300">বিষয় তালিকা (HSC & Admission)</h2>
+      <div class="flex items-center space-x-2 text-xs text-gray-400">
+        <i class="fa-solid fa-arrow-left cursor-pointer" onclick="switchTab('home')"></i>
+        <h2 class="font-bold text-white">বিষয় তালিকা (HSC & Admission)</h2>
+      </div>
       
       <div class="space-y-2 text-xs">
         <div onclick="startPractice('Physics')" class="card-bg p-3 rounded-xl flex justify-between items-center cursor-pointer">
@@ -138,19 +168,19 @@
       </div>
     </div>
 
-    <!-- 3. EXAM VIEW (100 Marks Full Admission Test) -->
+    <!-- 3. EXAM VIEW -->
     <div id="view-exam" class="space-y-3 hidden">
       <h2 class="text-xs font-bold text-gray-300">অনলাইন পরীক্ষা (Negative Marking System)</h2>
 
       <div class="card-bg p-4 rounded-xl space-y-2">
         <span class="bg-amber-500/20 text-amber-400 text-[9px] px-2 py-0.5 rounded font-bold">🔥 ফুল মডেল টেস্ট</span>
-        <h3 class="text-xs font-bold">বিশ্ববিদ্যালয় ভর্তি ফুল মেগা মডেল টেস্ট</h3>
+        <h3 class="text-xs font-bold">ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট স্পেশাল পূর্ণাঙ্গ মেগা মডেল টেস্ট</h3>
         <div class="flex space-x-4 text-[10px] text-gray-400">
           <span><i class="fa-solid fa-list-check"></i> ১০০টি প্রশ্ন</span>
           <span><i class="fa-regular fa-clock"></i> ৬০ মিনিট</span>
-          <span><i class="fa-solid fa-triangle-exclamation text-rose-400"></i> নেগেটিভ মার্জিন: -০.২৫</span>
+          <span><i class="fa-solid fa-triangle-exclamation text-rose-400"></i> নেগেটিভ: -০.২৫</span>
         </div>
-        <button onclick="start100MarksExam()" class="w-full bg-sky-500 text-black text-xs font-bold py-2 rounded-lg mt-2">পরীক্ষা শুরু করুন</button>
+        <button onclick="startFullExam()" class="w-full bg-sky-500 text-black text-xs font-bold py-2 rounded-lg mt-2">পরীক্ষা শুরু করুন</button>
       </div>
     </div>
 
@@ -161,24 +191,38 @@
         <p class="text-[9px] text-gray-400">আজকের সেরা পারফর্মেন্স</p>
       </div>
 
-      <div class="card-bg p-3 rounded-xl flex justify-between items-center text-xs">
-        <div class="flex items-center space-x-2">
-          <span class="font-bold text-amber-400">#১</span>
-          <div><p class="font-bold">তানভীর আহমেদ</p><p class="text-[9px] text-gray-400">ঢাকা বিশ্ববিদ্যালয়</p></div>
+      <!-- Top 3 Podium -->
+      <div class="grid grid-cols-3 gap-2 text-center pt-4">
+        <div class="card-bg p-2 rounded-xl mt-4">
+          <p class="text-xs font-bold text-gray-300">তাহাব বিন</p>
+          <p class="text-[9px] text-amber-400 font-bold">720 pts</p>
+          <span class="bg-slate-800 text-[10px] font-bold px-2 py-0.5 rounded text-gray-400">#২</span>
         </div>
-        <span class="text-amber-400 font-bold">৭৩৫ pts</span>
+        <div class="card-bg p-2 rounded-xl border-amber-500/50 gold-gradient text-black">
+          <p class="text-xs font-bold">তানভীর আহমেদ</p>
+          <p class="text-[9px] font-bold">735 pts</p>
+          <span class="bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded">#১</span>
+        </div>
+        <div class="card-bg p-2 rounded-xl mt-4">
+          <p class="text-xs font-bold text-sky-400">MD RONI</p>
+          <p class="text-[9px] text-amber-400 font-bold">119 pts</p>
+          <span class="bg-slate-800 text-[10px] font-bold px-2 py-0.5 rounded text-gray-400">#৩</span>
+        </div>
       </div>
     </div>
 
     <!-- 5. PROFILE VIEW -->
     <div id="view-profile" class="space-y-3 hidden">
-      <div class="card-bg p-4 rounded-xl text-center space-y-2">
-        <div class="w-12 h-12 bg-sky-500 rounded-full mx-auto flex items-center justify-center font-bold text-black"><i class="fa-solid fa-user"></i></div>
-        <h3 class="font-bold text-xs">শিক্ষার্থী প্রোফাইল</h3>
-        <p class="text-[9px] text-gray-400">ঢাকা বিশ্ববিদ্যালয় • HSC & বিশ্ববিদ্যালয় ভর্তি</p>
+      <div class="card-bg p-4 rounded-xl text-center space-y-2 border-amber-500/30">
+        <div class="w-14 h-14 badge-gradient rounded-full mx-auto flex items-center justify-center font-bold text-white text-lg">MR</div>
+        <h3 class="font-bold text-xs text-white">MD RONI</h3>
+        <p class="text-[9px] text-amber-400 font-bold">এডমিন ও প্রতিষ্ঠাতা • Exam Master</p>
+        <button onclick="switchTab('admin')" class="bg-amber-500 text-black text-[10px] font-bold px-3 py-1 rounded-lg">এডমিন প্যানেল প্রবেশ</button>
       </div>
 
       <div class="card-bg rounded-xl divide-y divide-slate-800 text-xs">
+        <div class="p-3 flex justify-between items-center"><span class="text-gray-300"><i class="fa-solid fa-bookmark text-amber-400 mr-2"></i> সংরক্ষিত প্রশ্ন (Bookmarks)</span><i class="fa-solid fa-chevron-right text-xs text-gray-500"></i></div>
+        <div class="p-3 flex justify-between items-center"><span class="text-gray-300"><i class="fa-solid fa-triangle-exclamation text-rose-400 mr-2"></i> ভুল প্রশ্নসমূহ (Wrong Questions)</span><i class="fa-solid fa-chevron-right text-xs text-gray-500"></i></div>
         <div onclick="switchTab('admin')" class="p-3 flex justify-between items-center cursor-pointer text-amber-400 font-bold">
           <span><i class="fa-solid fa-user-shield mr-2"></i> অ্যাডমিন প্যানেল (Admin Panel)</span>
           <i class="fa-solid fa-chevron-right text-xs"></i>
@@ -188,21 +232,22 @@
 
     <!-- 6. ADMIN PANEL VIEW -->
     <div id="view-admin" class="space-y-3 hidden">
-      <div class="card-bg p-3 rounded-xl flex items-center space-x-2 border-amber-500/50">
-        <i class="fa-solid fa-user-shield text-amber-400 text-lg"></i>
+      <div class="card-bg p-3 rounded-xl flex items-center space-x-3 border-amber-500/50">
+        <div class="w-10 h-10 gold-gradient rounded-lg flex items-center justify-center font-bold text-black"><i class="fa-solid fa-user-shield"></i></div>
         <div>
-          <h3 class="text-xs font-bold">অ্যাডমিন প্যানেল</h3>
-          <p class="text-[9px] text-gray-400">প্রশ্ন ব্যাংক আপডেট ও কন্ট্রোল করুন</p>
+          <h3 class="text-xs font-bold text-white">এডমিন প্যানেল</h3>
+          <p class="text-[9px] text-amber-400 font-bold">এডমিন: MD RONI</p>
         </div>
       </div>
 
       <div class="card-bg p-3 rounded-xl space-y-2 text-xs">
+        <p class="font-bold text-gray-300 text-[11px]">নতুন প্রশ্ন যুক্ত করুন:</p>
         <input id="adm-q" type="text" placeholder="প্রশ্ন লিখুন..." class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
         <div class="grid grid-cols-2 gap-2">
-          <input id="adm-o1" type="text" placeholder="অপশন ১" class="bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
-          <input id="adm-o2" type="text" placeholder="অপশন ২" class="bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
-          <input id="adm-o3" type="text" placeholder="অপশন ৩" class="bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
-          <input id="adm-o4" type="text" placeholder="অপশন ৪" class="bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
+          <input id="adm-o1" type="text" placeholder="অপশন A" class="bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
+          <input id="adm-o2" type="text" placeholder="অপশন B" class="bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
+          <input id="adm-o3" type="text" placeholder="অপশন C" class="bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
+          <input id="adm-o4" type="text" placeholder="অপশন D" class="bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
         </div>
         <input id="adm-ans" type="number" placeholder="সঠিক অপশন নম্বর (১-৪)" class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs">
         <textarea id="adm-exp" placeholder="ব্যাখ্যা লিখুন..." class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-white text-xs h-16"></textarea>
@@ -210,19 +255,30 @@
       </div>
     </div>
 
-    <!-- 7. ACTIVE QUIZ INTERFACE -->
+    <!-- 7. NOTIFICATIONS VIEW -->
+    <div id="view-notifications" class="space-y-3 hidden">
+      <h2 class="text-xs font-bold text-gray-300">বিজ্ঞপ্তি (Notifications)</h2>
+      <div class="space-y-2 text-xs">
+        <div class="card-bg p-3 rounded-xl space-y-1">
+          <p class="font-bold text-amber-400">আজকের ডেইলি চ্যালেঞ্জ চালু হয়েছে!</p>
+          <p class="text-[10px] text-gray-400">পদার্থবিজ্ঞান ও সাধারণ জ্ঞানের উপর ১৫টি প্রশ্ন রয়েছে। এখনই অংশগ্রহণ করুন।</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. QUIZ INTERFACE -->
     <div id="view-quiz" class="space-y-3 hidden">
       <div class="flex justify-between items-center text-xs text-gray-400">
         <span id="quiz-progress">প্রশ্ন ১ / ১০০</span>
-        <span id="quiz-score-live" class="text-emerald-400 font-bold">স্কোর: ০</span>
+        <span id="quiz-score-live" class="text-emerald-400 font-bold">স্কোর: 0.00</span>
       </div>
 
       <div class="card-bg p-4 rounded-xl space-y-3">
-        <h3 id="quiz-q-title" class="text-xs font-bold leading-relaxed"></h3>
+        <h3 id="quiz-q-title" class="text-xs font-bold leading-relaxed text-white"></h3>
         <div id="quiz-options" class="space-y-2 text-xs"></div>
       </div>
 
-      <div id="quiz-explanation" class="hidden card-bg p-3 rounded-xl text-xs space-y-1">
+      <div id="quiz-explanation" class="hidden card-bg p-3 rounded-xl text-xs space-y-1 border-amber-500/30">
         <p id="quiz-exp-status" class="font-bold"></p>
         <p id="quiz-exp-text" class="text-gray-300 text-[11px]"></p>
       </div>
@@ -233,7 +289,7 @@
   </main>
 
   <!-- BOTTOM NAVIGATION BAR -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-[#0A0E17]/95 border-t border-slate-800 py-2 text-gray-400 text-[9px] z-50">
+  <nav class="fixed bottom-0 left-0 right-0 bg-[#0B0F17]/95 border-t border-slate-800 py-2 text-gray-400 text-[9px] z-50">
     <div class="max-w-md mx-auto flex justify-around">
       <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center space-y-1 active-tab"><i class="fa-solid fa-house text-sm"></i><span>হোম</span></button>
       <button onclick="switchTab('practice')" id="nav-practice" class="flex flex-col items-center space-y-1"><i class="fa-solid fa-book-open text-sm"></i><span>অনুশীলন</span></button>
@@ -244,26 +300,22 @@
   </nav>
 
   <script>
-    // ১০০টি প্রশ্নের ডায়নামিক ডাটা জেনারেটর (HSC ও এডমিশন লেভেল)
     let dynamicBank = [];
-    
-    // প্রারম্ভিক নমুনা প্রশ্নাবলী (Physics, Chemistry, Bio, Math, Eng, Bangla, GK, ICT)
-    const baseQuestions = [
-      { q: "ভেক্টরের ডট গুণন শূন্য হলে ভেক্টরদ্বয়ের মধ্যবর্তী কোণ কত?", opts: ["0°", "45°", "90°", "180°"], ans: 2, exp: "A . B = AB cos(θ) = 0 হলে cos(θ) = 0, তাই θ = 90°।" },
-      { q: "মানুষের রক্তের pH এর মান কত?", opts: ["7.35 - 7.45", "6.0 - 6.5", "8.0 - 8.5", "5.5 - 6.0"], ans: 0, exp: "মানুষের রক্ত সামান্য ক্ষারীয় এবং এর pH ৭.৩৫-৭.৪৫।" },
-      { q: "কোষের পাওয়ার হাউস বলা হয় কাকে?", opts: ["রাইবোজোম", "মাইটোকন্ড্রিয়া", "লাইসোজোম", "গলগি বডি"], ans: 1, exp: "মাইটোকন্ড্রিয়ায় ATP তৈরি হয় বলে একে পাওয়ার হাউস বলে।" },
-      { q: "Choose the correct spelling:", opts: ["Lieutenant", "Leutenant", "Luitenant", "Lieutenent"], ans: 0, exp: "Lie-u-ten-ant (মিথ্যা তুমি দশ পিপড়া)।" },
-      { q: "বাংলাদেশের স্বাধীনতার ঘোষণাপত্র কে পাঠ করেন?", opts: ["বঙ্গবন্ধু শেখ মুজিবুর রহমান", "অধ্যাপক এম ইউসুফ আলী", "তাজউদ্দীন আহমদ", "সৈয়দ নজরুল ইসলাম"], ans: 1, exp: "১৭ এপ্রিল ১৯৭১ সালে অধ্যাপক এম ইউসুফ আলী স্বাধীনতার ঘোষণাপত্র পাঠ করেন।" }
+    const sampleQuestions = [
+      { q: "দুটি সমান মানের ভেক্টর একটি বিন্দুতে কত কোণে ক্রিয়া করলে তাদের লব্ধির মান যেকোনো একটি ভেক্টরের মানের সমান হবে?", opts: ["60°", "90°", "120°", "180°"], ans: 2, exp: "লব্ধি R = P হলে, P² = P² + P² + 2P² cos(α) ⇒ cos(α) = -1/2 ⇒ α = 120°।" },
+      { q: "কোনো গতিশীল বস্তুর ভরবেগ দ্বিগুণ করা হলে তার গতিশক্তি পূর্বের গতিশক্তির কত গুণ হবে?", opts: ["2 গুণ", "4 গুণ", "8 গুণ", "16 গুণ"], ans: 1, exp: "গতিশক্তি E = p² / 2m। ভরবেগ p দ্বিগুণ হলে গতিশক্তি ৪ গুণ বৃদ্ধি পাবে।" },
+      { q: "'অপরিচিতা' গল্পে অনুপমের আসল অভিভাবক কে ছিলেন?", opts: ["মা", "মামা", "শম্ভুনাথ সেন", "হরিণ"], ans: 1, exp: "অনুপমের মামা ছিলেন তার আসল অভিভাবক (NCTB বই)।" },
+      { q: "What is the synonym of the word 'BENEVOLENT'?", opts: ["Hostile", "Kind-hearted / Generous", "Greedy", "Cruel"], ans: 1, exp: "Benevolent শব্দের অর্থ দয়ালু বা পরোপকারী।" },
+      { q: "বিশুদ্ধ পানির pH এর মান কত (২৫° সেলসিয়াস তাপমাত্রায়)?", opts: ["0", "7.0", "7.4", "14.0"], ans: 1, exp: "২৫°C তাপমাত্রায় বিশুদ্ধ পানি নিরপেক্ষ এবং এর pH = 7.0।" }
     ];
 
-    // ১০০টি প্রশ্ন তৈরি করার লুপ
     for(let i = 0; i < 100; i++) {
-      let sample = baseQuestions[i % baseQuestions.length];
+      let s = sampleQuestions[i % sampleQuestions.length];
       dynamicBank.push({
-        q: `[প্রশ্ন ${i+1}] ${sample.q}`,
-        opts: sample.opts,
-        ans: sample.ans,
-        exp: sample.exp
+        q: `[প্রশ্ন ${i+1}] ${s.q}`,
+        opts: s.opts,
+        ans: s.ans,
+        exp: s.exp
       });
     }
 
@@ -272,7 +324,7 @@
     let totalScore = 0;
 
     function switchTab(tab) {
-      ['home', 'practice', 'exam', 'leaderboard', 'profile', 'admin', 'quiz'].forEach(t => {
+      ['home', 'practice', 'exam', 'leaderboard', 'profile', 'admin', 'notifications', 'quiz'].forEach(t => {
         const el = document.getElementById('view-' + t);
         if(el) el.classList.add('hidden');
         const nav = document.getElementById('nav-' + t);
@@ -284,7 +336,7 @@
       if(activeNav) activeNav.classList.add('active-tab');
     }
 
-    function startPractice(subject) {
+    function startPractice(title) {
       activeQuestions = dynamicBank.slice(0, 10);
       currentQ = 0;
       totalScore = 0;
@@ -292,8 +344,8 @@
       renderQuizQuestion();
     }
 
-    function start100MarksExam() {
-      activeQuestions = [...dynamicBank]; // পুরো ১০০ টি প্রশ্ন
+    function startFullExam() {
+      activeQuestions = [...dynamicBank];
       currentQ = 0;
       totalScore = 0;
       switchTab('quiz');
@@ -311,10 +363,11 @@
       document.getElementById('quiz-explanation').classList.add('hidden');
       document.getElementById('btn-next-q').classList.add('hidden');
 
+      const labels = ['A', 'B', 'C', 'D'];
       q.opts.forEach((opt, idx) => {
         const btn = document.createElement('button');
         btn.className = "w-full text-left bg-slate-900 border border-slate-800 p-2.5 rounded-lg flex items-center space-x-2";
-        btn.innerHTML = `<span class="w-5 h-5 rounded-full bg-slate-800 text-[10px] flex items-center justify-center font-bold text-sky-400">${idx+1}</span> <span>${opt}</span>`;
+        btn.innerHTML = `<span class="w-5 h-5 rounded bg-slate-800 text-[10px] flex items-center justify-center font-bold text-sky-400">${labels[idx]}</span> <span>${opt}</span>`;
         btn.onclick = () => answerQuestion(idx, btn);
         optsBox.appendChild(btn);
       });
@@ -337,7 +390,7 @@
         expStatus.innerText = "✓ সঠিক উত্তর! (+১.০০)";
         expStatus.className = "font-bold text-emerald-400";
       } else {
-        totalScore -= 0.25; // Negative marking
+        totalScore -= 0.25;
         btn.classList.add('bg-rose-500/20', 'border-rose-500', 'text-rose-400');
         optsBox[q.ans].classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-400');
         expStatus.innerText = "✗ ভুল উত্তর! (-০.২৫ নেগেটিভ মার্ক)";
@@ -355,7 +408,7 @@
       if(currentQ < activeQuestions.length) {
         renderQuizQuestion();
       } else {
-        alert(`পরীক্ষা সম্পন্ন হয়েছে!\nআপনার মোট প্রাপ্ত নম্বর: ${totalScore.toFixed(2)} / ${activeQuestions.length}`);
+        alert(`পরীক্ষা শেষ হয়েছে!\nপ্রাপ্ত স্কোর: ${totalScore.toFixed(2)} / ${activeQuestions.length}`);
         switchTab('home');
       }
     }
@@ -370,11 +423,11 @@
       const exp = document.getElementById('adm-exp').value;
 
       if(!q || !o1 || !o2 || !o3 || !o4 || isNaN(ans)) {
-        return alert("সবগুলো ঘর পুরন করুন!");
+        return alert("দয়া করে সবগুলো তথ্য সঠিকভাবে দিন!");
       }
 
       dynamicBank.unshift({ q, opts: [o1, o2, o3, o4], ans, exp });
-      alert("নতুন প্রশ্ন যুক্ত করা হয়েছে!");
+      alert("নতুন প্রশ্ন সফলভাবে যুক্ত হয়েছে!");
       
       document.getElementById('adm-q').value = '';
       document.getElementById('adm-o1').value = '';
